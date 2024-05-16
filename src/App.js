@@ -1,11 +1,51 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import SquareRoot from './SquareRoot';
+import i18n from "i18next";
+import { initReactI18next, useTranslation } from "react-i18next";
+import enTranslations from "./locales/en.json";
+import ruTranslations from "./locales/ru.json";
+import chTranslations from "./locales/ch.json";
+import arTranslations from "./locales/ar.json";
+import hdTranslations from "./locales/hd.json";
+import spTranslations from "./locales/sp.json";
+
+i18n
+  .use(initReactI18next)
+  .init({
+    resources: {
+      en: {
+        translation: enTranslations
+      },
+      ru: {
+        translation: ruTranslations
+      },
+      ch: {
+        translation: chTranslations
+      },
+      ar: {
+        translation: arTranslations
+      },
+      hd: {
+        translation: hdTranslations
+      },
+      sp: {
+        translation: spTranslations
+      },
+    },
+    lng: "en",
+    fallbackLng: "en",
+    interpolation: {
+      escapeValue: false
+    }
+  }
+);
 
 const App = () => {
 
   const [ value, setValue ] = useState('');
   const [ accuracy, setAccuracy ] = useState(3);
+  const { t } = useTranslation();
 
   const calcSquareRoot = () => {
     const squareRoot = new SquareRoot(value, accuracy);
@@ -14,27 +54,39 @@ const App = () => {
   }
 
   return (
-    <Container className="d-flex justify-content-center align-items-center" style={{ height: '100vh' }}>
-      <Row>
-        <Col>
-          <Form>
+    <Container>
+      <Container className="ms-5 mt-4 d-flex justify-content-end align-items-center">
+        <strong className="mx-3">{t('language')}:</strong>
+        <Button variant="dark" className="mx-3" onClick={() => i18n.changeLanguage('sp')}>Español</Button>
+        <Button variant="dark" className="mx-3" onClick={() => i18n.changeLanguage('hd')}>हिन्दी</Button>
+        <Button variant="dark" className="mx-3" onClick={() => i18n.changeLanguage('ar')}>العربية</Button>
+        <Button variant="dark" className="mx-3" onClick={() => i18n.changeLanguage('ch')}>中文</Button>
+        <Button variant="dark" className="mx-3" onClick={() => i18n.changeLanguage('en')}>English</Button>
+        <Button variant="dark" className="mx-3" onClick={() => i18n.changeLanguage('ru')}>Русский</Button>
+      </Container>
 
-            <Form.Group className="d-flex justify-content-center align-items-center" controlId="numberInput">
-              <Row>
-                <Col>
-                  <Form.Label className='mx-3'>Введите число</Form.Label>
-                  <Form.Control value={value} onChange={e => setValue(e.target.value)} type="text" placeholder="Введите число" />
-                  <Form.Label className='mx-3 mt-5'> Введите точность</Form.Label>
-                  <Form.Control value={accuracy} onChange={e => setAccuracy(e.target.value)} type="text" placeholder="Введите точность" />
-                </Col>
+      <Container className="d-flex justify-content-center align-items-center" style={{ height: '80vh' }}>
+        <Row>
+          <Col>
+            <Form>
 
-              </Row>
+              <Form.Group className="d-flex justify-content-center align-items-center" controlId="numberInput">
+                <Row>
+                  <Col>
+                    <Form.Label className='mx-3'>{t('enterNumber')}</Form.Label>
+                    <Form.Control value={value} onChange={e => setValue(e.target.value)} type="text" placeholder={t('enterNumber')} />
+                    <Form.Label className='mx-3 mt-5'>{t('enterAccuracy')}</Form.Label>
+                    <Form.Control value={accuracy} onChange={e => setAccuracy(e.target.value)} type="text" placeholder="Введите точность" />
+                  </Col>
 
-              <Button className="m-5" variant="dark" onClick={calcSquareRoot}>Посчитать квадратный корень</Button>
-            </Form.Group>
-          </Form>
-        </Col>
-      </Row>
+                </Row>
+
+                <Button className="m-5" variant="dark" onClick={calcSquareRoot}>{t('calculate')}</Button>
+              </Form.Group>
+            </Form>
+          </Col>
+        </Row>
+      </Container>
     </Container>
   );
 }
