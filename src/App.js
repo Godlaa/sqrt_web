@@ -50,7 +50,7 @@ const App = () => {
   const calcSquareRoot = () => {
     const squareRoot = new SquareRoot(value, accuracy);
     const calcAnswer = squareRoot.calc();
-    if (calcAnswer ? alert(squareRoot.calc()) : alert('Ошибка вычисления'));
+    if (calcAnswer ? alert(t('result').toString() + ': ' + squareRoot.calc().toString()) : alert('Ошибка вычисления'));
   }
 
   return (

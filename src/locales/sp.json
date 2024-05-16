@@ -2,5 +2,6 @@
     "enterNumber": "Introduzca un número",
     "enterAccuracy": "Introduzca la precisión",
     "calculate": "Calcular",
-    "language": "Idioma"
+    "language": "Idioma",
+    "result": "Resultado"
 }

@@ -10,7 +10,10 @@ class SquareRoot {
 
         returnWithAccuracy(value){
             if(isNaN(value)) return null;
-            if(value instanceof Big) return value.toFixed(this.accuracy);
+            if(value instanceof Big) {
+                if(value > 1e+21) return value.toExponential(this.accuracy);
+                return value.toFixed(this.accuracy);
+            }
             if(value instanceof Complex) {
                 const re = value.re.toFixed(this.accuracy);
                 const im = value.im.toFixed(this.accuracy);

@@ -2,5 +2,6 @@
     "enterNumber": "Введите число",
     "enterAccuracy": "Введите точность",
     "calculate": "Вычислить",
-    "language": "Язык"
+    "language": "Язык",
+    "result": "Результат"
 }
